@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Overcoming By Faith Store{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        {% endblock %}
+
+        {% block javascripts %}
+{% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="flex flex-col justify-between min-h-screen relative">
+            <div>
+                <header class="h-[114px] shrink-0 flex flex-col sm:flex-row items-center sm:justify-between py-4 sm:py-0 px-6 border-b border-white/20 shadow-md">
+                    <a href="{{ path('homepage') }}">
+                        <img class="h-[42px]" src="{{ asset('images/shop-logo.webp') }}" alt="shop logo">
+                    </a>
+                    <nav id="headerLinks">
+                        {% for headerLink in headerLinks %}
+                            <a class="hover:text-amber-400 pt-2" href="{{ headerLink.path }}">
+                                {{ headerLink.name }}
+                            </a>
+                        {% endfor %}
+                    </nav>
+                    <nav id="buttonLinks">
+                        <a href="{{ path('search') }}"><span>Search</span></a>
+                        <a href="{{ path('cart') }}"><span>Cart</span></a>
+                    </nav>
+                </header>
+            </div>
+            <div class="text-center">
+                {% block body %}
+                    {{ include("main/_banner.html.twig") }}
+                    {{ include("main/_content.html.twig") }}
+                    {{ include("main/_featured.html.twig") }}
+                {% endblock %}
+            </div>
+            <div>
+                <footer class="h-[115px] text-white flex flex-col sm:flex-row items-center sm:justify-between py-4 sm:py-0 px-6 border-t-2 bg-slate-700">
+                    <h1>Overcoming By Faith Ministries</h1>
+                    <nav id="footerLinks">
+                        {% for footerLink in footerLinks %}
+                            <a class="hover:text-amber-400 pt-2" href="{{ footerLink.path }}">
+                                <i class="fa-brands fa-facebook"></i>{{ footerLink.name }}
+                            </a>
+                        {% endfor %}
+                    </nav>
+                    <nav id="socialLinks">
+                        {% for socialLink in socialLinks %}
+                            <a class="hover:text-amber-400 pt-2" href="{{ socialLink.path }}">
+                                {{ socialLink.name }}
+                            </a>
+                        {% endfor %}
+                    </nav>
+                </footer>
+            </div>
+            <div class="p-5 bg-white/5 mt-3 text-center">
+                Made with ❤️ by <a class="text-[#0086C4]" href="https://symfonycasts.com">SymfonyCasts</a>
+            </div>
+        </div>
+    </body>
+</html>
